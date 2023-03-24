@@ -7,6 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
 mongoose.connect("mongodb://127.0.0.1:27017/mern-todo", {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -38,7 +39,7 @@ app.delete('/todo/delete/:id', async (req, res) => {
     res.json(result);
 })
 
-app.put('/todo/complete/:id', async (req, res) => {
+app.get('/todo/complete/:id', async (req, res) => {
     const todo = await Todo.findById(req.params.id);
 
     todo.complete = !todo.complete;
