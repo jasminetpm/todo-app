@@ -1,13 +1,16 @@
-import React from 'react';
-import { useQueryClient, useMutation, QueryClient } from 'react-query';
+import React, { useContext, useState } from 'react';
+import { useQueryClient, useMutation } from 'react-query';
 import updateTodoRequest from '../api/updateTodoRequest';
 import deleteTodoRequest from '../api/deleteTodoRequest';
+import { TokenContext } from '../App';
 
 export const TodoItem = ({ todo }) => {
+    const [token] = useContext(TokenContext);
+
     const queryClient = useQueryClient();
 
     const { mutate: updateTodo } = useMutation(
-        (updatedTodo) => updateTodoRequest(updatedTodo),
+        (updatedTodo) => updateTodoRequest(updatedTodo, token),
         {
             onSettled: () => {
                 queryClient.invalidateQueries('todos');
@@ -16,7 +19,7 @@ export const TodoItem = ({ todo }) => {
     );
 
     const { mutate: deleteTodo } = useMutation(
-        (updatedTodo) => deleteTodoRequest(updatedTodo),
+        (updatedTodo) => deleteTodoRequest(updatedTodo, token),
         {
             onSettled: () => {
                 queryClient.invalidateQueries('todos');

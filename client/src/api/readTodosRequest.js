@@ -1,6 +1,6 @@
-import { API_BASE, token } from "./config";
+import { API_BASE } from "./config";
 
-export default () => {
+export default (token) => {
     return fetch(`${API_BASE}/todos`, {
         method: 'GET',
         headers: {
