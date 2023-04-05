@@ -25,14 +25,8 @@ module.exports = async (req, res) => {
         complete: false
     });
 
-    // console.log(todo.text);
-
-    //added "async" and "await"
     await todo.save();
     res.json(todo);
 };
 
-// module.exports = (req, res) => {
-//     const {text} = req.body;
-//     console.log(text);
 // };

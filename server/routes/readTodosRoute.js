@@ -22,8 +22,7 @@ module.exports =  async (req, res) => {
     const user = (parseJwt(token)).user;
 
     const todos =  await Todo.find({ 'user': user });
-    // this gives us back every todo model in the database
+    
     res.json(todos);
-    //send it back to the user
 };
 
